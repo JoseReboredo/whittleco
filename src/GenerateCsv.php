@@ -44,17 +44,26 @@ class GenerateCsv
         $data = [];
         $response = $this->doRequest($url . '?access_token=' . $accessToken);
 
+        $i = 0;
+        print_r('First request: ' . ++$i . PHP_EOL);
+
         do {
             $body = json_decode((string)$response->getBody(), true);
             if (!empty($body['data'])) {
                 array_push($data, ...$body['data']);
             }
             if (!empty($body['paging']['next'])) {
-                $this->doRequest($body['paging']['next']);
+                $response = $this->doRequest($body['paging']['next']);
+                print_r('Request done: ' . PHP_EOL);
             }
+            print_r('NEXT request: ' . ++$i . PHP_EOL);
         } while (!empty($body['paging']['next']));
 
+        print_r('Out: ' . PHP_EOL);
+
         $this->generateCsvFile($data);
+
+        print_r('File generated: ' . PHP_EOL);
     }
 
     /**
