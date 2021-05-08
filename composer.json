@@ -1,0 +1,14 @@
+{
+  "name": "whittleco/graph-instagram",
+  "license": "proprietary",
+  "type": "project",
+  "autoload": {
+    "psr-4" : {
+      "WhittleCo\\" : "src/"
+    }
+  },
+  "require": {
+    "php": "7.4.*",
+    "guzzlehttp/guzzle": "7.3.0"
+  }
+}
